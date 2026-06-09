@@ -15,4 +15,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/home', [AuthController::class, 'home']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // 个人中心
+    Route::get('/profile', [AuthController::class, 'profile']);
+    Route::get('/profile/edit', [AuthController::class, 'showEditProfileForm']);
+    Route::put('/profile/edit', [AuthController::class, 'updateProfile']);
+    Route::get('/profile/password', [AuthController::class, 'showPasswordForm']);
+    Route::put('/profile/password', [AuthController::class, 'updatePassword']);
 });

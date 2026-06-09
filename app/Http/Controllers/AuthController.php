@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,5 +76,44 @@ class AuthController extends Controller
     public function home()
     {
         return view('home');
+    }
+
+    // ===== 个人中心 =====
+    public function profile()
+    {
+        return view('profile');
+    }
+
+    public function showEditProfileForm()
+    {
+        return view('profile.edit');
+    }
+
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        $user = Auth::user();
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+        ]);
+
+        return redirect('/profile')->with('success', '信息修改成功！');
+    }
+
+    // ===== 修改密码 =====
+    public function showPasswordForm()
+    {
+        return view('profile.password');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $user->update([
+            'password' => $request->new_password,
+        ]);
+
+        return redirect('/profile')->with('success', '密码修改成功！');
     }
 }
