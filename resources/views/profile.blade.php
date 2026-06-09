@@ -3,25 +3,25 @@
 @section('title', '个人中心')
 
 @section('content')
+<div class="page-content">
     <h2>个人中心</h2>
 
     {{-- 头像 --}}
-    <div>
+    <div style="margin-bottom:15px;">
         @if (Auth::user()->avatar)
-            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="头像" width="100" height="100">
+            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="头像" width="100" height="100" style="border-radius:50%;border:3px solid #eee;">
         @else
-            <div style="width:100px;height:100px;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;color:#999;">无头像</div>
+            <div style="width:100px;height:100px;border-radius:50%;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;color:#999;background:#fafafa;">无头像</div>
         @endif
-        <br>
-        <form method="POST" action="/profile/avatar" enctype="multipart/form-data">
+        <br><br>
+        <form method="POST" action="/profile/avatar" enctype="multipart/form-data" style="display:flex;align-items:center;gap:10px;">
             @csrf
             <input type="file" name="avatar" accept="image/jpeg,image/png,image/jpg,image/gif" required>
-            <button type="submit">上传头像</button>
+            <button type="submit" class="dhx-btn dhx-btn-primary">上传头像</button>
         </form>
     </div>
-    <br>
 
-    <table border="1" cellpadding="8">
+    <table>
         <tr>
             <th>UID</th>
             <td>{{ Auth::user()->uid }}</td>
@@ -48,7 +48,8 @@
         </tr>
     </table>
     <br>
-    <a href="/profile/edit">修改信息</a>
-    &nbsp;|&nbsp;
-    <a href="/profile/password">修改密码</a>
+    <a href="/profile/edit" class="dhx_button dhx_button--outlined dhx_button--primary" style="text-decoration:none;">修改信息</a>
+    &nbsp;
+    <a href="/profile/password" class="dhx_button dhx_button--outlined dhx_button--primary" style="text-decoration:none;">修改密码</a>
+</div>
 @endsection
