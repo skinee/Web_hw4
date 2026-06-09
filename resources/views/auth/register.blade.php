@@ -5,7 +5,7 @@
 @section('content')
 <div class="page-content">
     <h2>用户注册</h2>
-    <form method="POST" action="/register">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
         <div style="margin-bottom:12px;">
             <label>用户名：</label>
@@ -32,6 +32,6 @@
             <button type="submit" class="dhx-btn dhx-btn-primary">注册</button>
         </div>
     </form>
-    <p style="margin-top:15px;">已有账号？<a href="/login">立即登录</a></p>
+    <p style="margin-top:15px;">已有账号？<a href="{{ route('login') }}">立即登录</a></p>
 </div>
 @endsection

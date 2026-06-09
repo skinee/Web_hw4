@@ -46,14 +46,14 @@
                     <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="avatar">
                 @endif
                 <span class="username">欢迎，{{ Auth::user()->username }}！</span>
-                <a href="/home">主页</a>
-                <a href="/profile">个人中心</a>
-                <form method="POST" action="/logout" style="display:inline">@csrf
+                <a href="{{ route('home') }}">主页</a>
+                <a href="{{ route('profile') }}">个人中心</a>
+                <form method="POST" action="{{ route('logout') }}" style="display:inline">@csrf
                     <button type="submit" class="dhx-btn-danger">退出登录</button>
                 </form>
             @else
-                <a href="/login">登录</a>
-                <a href="/register">注册</a>
+                <a href="{{ route('login') }}">登录</a>
+                <a href="{{ route('register') }}">注册</a>
             @endauth
         </div>
     </div>

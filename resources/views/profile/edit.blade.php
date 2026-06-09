@@ -5,7 +5,7 @@
 @section('content')
 <div class="page-content">
     <h2>修改基础信息</h2>
-    <form method="POST" action="/profile/edit">
+    <form method="POST" action="{{ route('profile.edit') }}">
         @csrf
         @method('PUT')
         <div style="margin-bottom:12px;">
@@ -25,6 +25,6 @@
             <button type="submit" class="dhx-btn dhx-btn-primary">保存修改</button>
         </div>
     </form>
-    <p style="margin-top:15px;"><a href="/profile">返回个人中心</a></p>
+    <p style="margin-top:15px;"><a href="{{ route('profile') }}">返回个人中心</a></p>
 </div>
 @endsection

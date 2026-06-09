@@ -14,7 +14,7 @@
             <div style="width:100px;height:100px;border-radius:50%;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;color:#999;background:#fafafa;">无头像</div>
         @endif
         <br><br>
-        <form method="POST" action="/profile/avatar" enctype="multipart/form-data" style="display:flex;align-items:center;gap:10px;">
+        <form method="POST" action="{{ route('profile.avatar') }}" enctype="multipart/form-data" style="display:flex;align-items:center;gap:10px;">
             @csrf
             <input type="file" name="avatar" accept="image/jpeg,image/png,image/jpg,image/gif" required>
             <button type="submit" class="dhx-btn dhx-btn-primary">上传头像</button>

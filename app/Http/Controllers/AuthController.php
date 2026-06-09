@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/home')->with('success', '注册成功！');
+        return redirect()->route('home')->with('success', '注册成功！');
     }
 
     // ===== 登录 =====
@@ -56,7 +56,7 @@ class AuthController extends Controller
             $user->save();
 
             $request->session()->regenerate();
-            return redirect('/home')->with('success', '登录成功！');
+            return redirect()->route('home')->with('success', '登录成功！');
         }
 
         return back()->withErrors([
@@ -70,7 +70,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect()->route('login');
     }
 
     // ===== 主页 =====
@@ -99,7 +99,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
         ]);
 
-        return redirect('/profile')->with('success', '信息修改成功！');
+        return redirect()->route('profile')->with('success', '信息修改成功！');
     }
 
     // ===== 修改密码 =====
@@ -115,7 +115,7 @@ class AuthController extends Controller
             'password' => $request->new_password,
         ]);
 
-        return redirect('/profile')->with('success', '密码修改成功！');
+        return redirect()->route('profile')->with('success', '密码修改成功！');
     }
 
     // ===== 头像上传 =====
@@ -142,6 +142,6 @@ class AuthController extends Controller
         $user->avatar = $path;
         $user->save();
 
-        return redirect('/profile')->with('success', '头像上传成功！');
+        return redirect()->route('profile')->with('success', '头像上传成功！');
     }
 }

@@ -5,7 +5,7 @@
 @section('content')
 <div class="page-content">
     <h2>修改密码</h2>
-    <form method="POST" action="/profile/password">
+    <form method="POST" action="{{ route('profile.password') }}">
         @csrf
         @method('PUT')
         <div style="margin-bottom:12px;">
@@ -25,6 +25,6 @@
             <button type="submit" class="dhx-btn dhx-btn-primary">修改密码</button>
         </div>
     </form>
-    <p style="margin-top:15px;"><a href="/profile">返回个人中心</a></p>
+    <p style="margin-top:15px;"><a href="{{ route('profile') }}">返回个人中心</a></p>
 </div>
 @endsection
