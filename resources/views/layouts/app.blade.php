@@ -11,6 +11,9 @@
         <h3>用户认证系统</h3>
         <div>
             @auth
+                @if (Auth::user()->avatar)
+                    <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="头像" width="30" height="30" style="border-radius:50%;vertical-align:middle;">
+                @endif
                 <span>欢迎，{{ Auth::user()->username }}！</span>
                 <a href="/home">主页</a>
                 <a href="/profile">个人中心</a>

@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -115,5 +116,32 @@ class AuthController extends Controller
         ]);
 
         return redirect('/profile')->with('success', '密码修改成功！');
+    }
+
+    // ===== 头像上传 =====
+    public function uploadAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'avatar.required' => '请选择头像图片',
+            'avatar.image' => '请上传图片文件',
+            'avatar.mimes' => '仅支持 jpeg、png、jpg、gif 格式',
+            'avatar.max' => '图片大小不能超过 2MB',
+        ]);
+
+        $user = Auth::user();
+
+        // 删除旧头像
+        if ($user->avatar) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        // 存储新头像
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $user->avatar = $path;
+        $user->save();
+
+        return redirect('/profile')->with('success', '头像上传成功！');
     }
 }

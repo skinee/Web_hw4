@@ -4,6 +4,23 @@
 
 @section('content')
     <h2>个人中心</h2>
+
+    {{-- 头像 --}}
+    <div>
+        @if (Auth::user()->avatar)
+            <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="头像" width="100" height="100">
+        @else
+            <div style="width:100px;height:100px;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;color:#999;">无头像</div>
+        @endif
+        <br>
+        <form method="POST" action="/profile/avatar" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="avatar" accept="image/jpeg,image/png,image/jpg,image/gif" required>
+            <button type="submit">上传头像</button>
+        </form>
+    </div>
+    <br>
+
     <table border="1" cellpadding="8">
         <tr>
             <th>UID</th>

@@ -22,4 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/edit', [AuthController::class, 'updateProfile']);
     Route::get('/profile/password', [AuthController::class, 'showPasswordForm']);
     Route::put('/profile/password', [AuthController::class, 'updatePassword']);
+
+    // 头像上传
+    Route::post('/profile/avatar', [AuthController::class, 'uploadAvatar']);
 });
