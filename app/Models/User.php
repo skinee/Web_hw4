@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Services\SnowflakeService;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,9 +20,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'uid',
+        'username',
         'email',
+        'phone',
         'password',
+        'avatar',
+        'last_login_at',
     ];
 
     /**
@@ -43,7 +48,21 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'last_login_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * 注册时自动生成 UID
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (User $user) {
+            if (empty($user->uid)) {
+                $snowflake = app(SnowflakeService::class);
+                $user->uid = $snowflake->generateUid();
+            }
+        });
     }
 }

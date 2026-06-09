@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('uid', 32)->unique()->comment('雪花算法生成的唯一ID');
+            $table->string('username', 50)->unique()->comment('用户名');
+            $table->string('email', 100)->unique()->comment('邮箱');
+            $table->string('phone', 20)->nullable()->comment('手机号');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('avatar')->nullable()->comment('头像路径');
+            $table->timestamp('last_login_at')->nullable()->comment('最后登录时间');
             $table->rememberToken();
             $table->timestamps();
         });
