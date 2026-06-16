@@ -14,5 +14,8 @@
 ## ❌ 未完成
 - [ ] JWT 认证
 
+## 🚀 部署
+完整部署步骤见 [`deploy-checklist.md`](deploy-checklist.md)
+
 ## 注意事项
 部署时需要设置软路由，避免出现跳转不对的问题
